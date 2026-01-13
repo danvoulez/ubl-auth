@@ -1,0 +1,1 @@
+/Users/ubl-ops/Chip\ Registry/ubl-auth-0.1.1-cratesio/target/debug/examples/roundtrip: /Users/ubl-ops/Chip\ Registry/ubl-auth-0.1.1-cratesio/examples/roundtrip.rs /Users/ubl-ops/Chip\ Registry/ubl-auth-0.1.1-cratesio/src/lib.rs

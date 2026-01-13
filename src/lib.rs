@@ -1,8 +1,11 @@
 
 #![forbid(unsafe_code)]
 
+/// Re-export json_atomic for LLM-first canonical JSON serialization.
+pub use json_atomic;
+
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD as B64URL, Engine as _};
-use ed25519_dalek::{VerifyingKey, Signature, Verifier};
+use ed25519_dalek::{VerifyingKey, Signature};
 use once_cell::sync::Lazy;
 use parking_lot::Mutex;
 use serde::{Deserialize, Serialize};
@@ -215,7 +218,8 @@ mod tests {
     use rand::{SeedableRng, rngs::StdRng};
     use ed25519_dalek::{SigningKey, Signer};
     use serde_json::json;
-    use base64::{engine::general_purpose::URL_SAFE_NO_PAD as B64URL, Engine as _};
+    use base64::engine::general_purpose::URL_SAFE_NO_PAD as B64URL;
+    use json_atomic::canonize;
 
     #[test]
     fn roundtrip_sign_and_verify_with_cache() {
@@ -237,8 +241,8 @@ mod tests {
             "nbf": now - 5,
             "exp": now + 3600
         });
-        let hdr = B64URL.encode(serde_json::to_string(&header).unwrap());
-        let pld = B64URL.encode(serde_json::to_string(&payload).unwrap());
+        let hdr = B64URL.encode(canonize(&header).unwrap());
+        let pld = B64URL.encode(canonize(&payload).unwrap());
         let msg = format!("{}.{}", hdr, pld);
         let sig = sk.sign(msg.as_bytes());
         let jwt = format!("{}.{}", msg, B64URL.encode(sig.to_bytes()));
