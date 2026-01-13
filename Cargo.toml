@@ -1,7 +1,7 @@
 
 [package]
 name = "ubl-auth"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "DID-first Ed25519 JWT/JWKS verification for OIDC-style flows. Enforces alg=EdDSA, checks exp/nbf/iat, JWKS cache."
@@ -9,7 +9,7 @@ readme = "README.md"
 repository = "https://github.com/danvoulez/ubl-auth"
 homepage = "https://id.ubl.agency"
 documentation = "https://docs.rs/ubl-auth"
-keywords = ["jwt","jwks","ed25519","eddsa","oidc","did","did-key","did-web","axum"]
+keywords = ["jwt", "jwks", "ed25519", "eddsa", "oidc"]
 categories = ["authentication","cryptography","web-programming"]
 exclude = [".github/*", "target/*", ".gitignore"]
 
